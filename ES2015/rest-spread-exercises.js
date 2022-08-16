@@ -32,8 +32,6 @@ const removeKey = (obj, key) => {
   return newObj;
 }
 
-/** Combine two objects and return a new object. */
-
 const combine = (obj1, obj2) => {
   return { ...obj1, ...obj2 };
 }
