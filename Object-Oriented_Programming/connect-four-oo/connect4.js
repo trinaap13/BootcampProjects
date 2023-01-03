@@ -72,7 +72,6 @@ class Game {
     const piece = document.createElement('div');
     piece.classList.add('piece');
     piece.style.backgroundColor = this.currentPlayer.color;
-
     piece.style.top = -50 * (y + 2);
   
     const spot = document.getElementById(`${y}-${x}`);
@@ -83,8 +82,8 @@ class Game {
   
   endGame(msg) {
     alert(msg);
-    const topCol = document.querySelector("#column-top");
-    topCol.removeEventListener("click", this.handleGameClick);
+    const top = document.querySelector("#column-top");
+    top.removeEventListener("click", this.handleGameClick);
   }
   
   /** handleClick: handle click of column top to play piece */
@@ -103,37 +102,37 @@ class Game {
     this.board[y][x] = this.currentPlayer;
     this.placeInTable(y, x);
     
+    // check for tie
+    if (this.board.every(row => row.every(cell => cell))) {
+      return this.endGame('Tie!');
+    }
+
     // check for win
     if (this.checkForWin()) {
       this.gameOver = true;
       return this.endGame(`Player ${this.currentPlayer.color} won!`);
     }
-    
-    // check for tie
-    if (this.board.every(row => row.every(cell => cell))) {
-      return endGame('Tie!');
-    }
       
     // switch players
-    this.currentPlayer = this.currentPlayer === this.players[0] ? this.players[1] : this.players[0];
+    this.currentPlayer = 
+      this.currentPlayer === this.players[0] ? this.players[1] : this.players[0];
   }
   
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
   
   checkForWin() {
-    const _win = cells => 
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
-  
-      cells.every(
-        ([y, x]) =>
-          y >= 0 &&
-          y < this.height &&
-          x >= 0 &&
-          x < this.width &&
-          this.board[y][x] === this.currPlayer
-      );
+      const _win = cells => 
+        cells.every(
+          ([y, x]) =>
+            y >= 0 &&
+            y < this.height &&
+            x >= 0 &&
+            x < this.width &&
+            this.board[y][x] === this.currentPlayer
+        );
   
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
