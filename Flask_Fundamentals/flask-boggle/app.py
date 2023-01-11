@@ -16,7 +16,7 @@ def homepage():
     highscore = session.get('highscore', 0)
     
 
-    return render_template('index.html', num_plays=num_plays,
+    return render_template('base.html', num_plays=num_plays,
                             board=game_board,
                             highscore=highscore
                            )
