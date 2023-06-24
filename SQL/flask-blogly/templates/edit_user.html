@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit user</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block main %}
+    <h1>Edit a user</h1>
+
+    <form method="post">
+        <div>
+            <label for="first_name">First Name</label><br>
+            <input type="text" name="first_name" placeholder="Enter a first name" value="{{ user.first_name }}" required>
+        </div>
+        <div>
+            <label for="last_name">Last Name</label><br>
+            <input type="text" name="last_name" placeholder="Enter a last name" value="{{ user.last_name }}" required>
+        </div>
+        <div>
+            <label for="image_url">Image URL</label><br>
+            <input type="url" name="image_url" placeholder="Provide an image of this user" value="{{ user.image_url }}">
+        </div>
+
+        <a href="/users/{{user.id}}">Cancel
+            <button type="submit">Save</button>
+        </a>
+
+    </form>
+
+    {% endblock %}
+</body>
+</html>

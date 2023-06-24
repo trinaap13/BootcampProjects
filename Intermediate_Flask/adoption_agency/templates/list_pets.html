@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List All Pets</title>
+</head>
+<body>
+    {% block content %}
+    <h1>Available Pets</h1>
+
+    <div>
+        <ul>
+            {% for pet in pets %}
+                <li>
+                    <a href="/{{pet.id}}">
+                        {{ pet.name }}
+                    </a>                 
+                    {% if pet.photo_url %}
+                        <img src="{{ pet.photo_url }}">
+                    {% endif %}
+                    {% if pet.available %}
+                        <strong>Available</strong>
+                        {% else %}
+                        <strong>Not available</strong>
+                    {% endif %}
+                </li>
+
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="/add">Add a Pet</a>
+
+    {% endblock %}
+</body>
+</html>
